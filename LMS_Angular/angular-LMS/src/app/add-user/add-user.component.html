@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Add User</div>
+        <div class="card-body">
+          <form (ngSubmit)="submitForm()" #userForm="ngForm">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="Enter first name" [(ngModel)]="formData.firstName" name="firstName" required>
+              <div *ngIf="userForm.submitted && !formData.firstName" class="text-danger">First Name is required</div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Enter last name" [(ngModel)]="formData.lastName" name="lastName" required>
+              <div *ngIf="userForm.submitted && !formData.lastName" class="text-danger">Last Name is required</div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <!-- <input type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="formData.email" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" [ngModelOptions]="{updateOn: 'blur'}"> -->
+              <input type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="formData.email" name="email" required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" [ngModelOptions]="{updateOn: 'blur'}">
+
+              <div *ngIf="userForm.submitted && !formData.email" class="text-danger">Email is required</div>
+              <div *ngIf="userForm.controls['email'].dirty && userForm.controls['email'].hasError('pattern')" class="text-danger">Invalid email</div>
+            </div>
+
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" placeholder="Enter username" [(ngModel)]="formData.username" name="username" required>
+              <div *ngIf="userForm.submitted && !formData.username" class="text-danger">Username is required</div>
+              <div *ngIf="usernameExists" class="text-danger">Username already exists</div>
+            </div>
+            
+            
+
+            <div class="form-group">
+              <label>Role Type</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="roleType" id="publisher" value="2" [(ngModel)]="formData.roleType">
+                <label class="form-check-label" for="publisher">
+                  Publisher
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="roleType" id="user" value="3" [(ngModel)]="formData.roleType">
+                <label class="form-check-label" for="user">
+                  User
+                </label>
+              </div>
+            </div>
+            
+            
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Enter password" [(ngModel)]="formData.password" name="password" required minlength="8" maxlength="16"
+                     pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}" 
+                     [ngModelOptions]="{updateOn: 'blur'}">
+              <div *ngIf="userForm.submitted && !formData.password" class="text-danger">Password is required</div>
+              <div *ngIf="userForm.controls['password'].dirty && userForm.controls['password'].errors && userForm.controls['password'].errors['minlength']" class="text-danger">Password must be at least 8 characters long</div>
+              <div *ngIf="userForm.controls['password'].dirty && userForm.controls['password'].errors && userForm.controls['password'].hasError('pattern')" class="text-danger">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character</div>
+            </div>
+            
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

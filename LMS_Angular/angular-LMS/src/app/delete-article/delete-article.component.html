@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h2 class="text-center mb-4 topic">Delete article(s)</h2>
+      <div class="col-md-8">
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search an article title...">
+            <button class="btn btn-primary" type="button">Search</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <!-- <th>Role Type</th> -->
+                <th>Document Title</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of documents">
+                <td>{{doc.authorId}}</td>
+                <!-- <td>Publisher</td> -->
+                <td>{{doc.title}}</td>
+                <td><button (click)="DeleteArticle(doc.id)" class="btn btn-danger">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

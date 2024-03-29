@@ -1,0 +1,51 @@
+    <div class="row justify-content-center">
+      <h2 class="text-center mb-4 topic">Block a User</h2>
+      <div class="col-md-8">
+        <!-- Search Form -->
+        <form class="mb-3">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search users by username" name = "search" [(ngModel)]="search">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" (click)="onSearch()">Search</button>
+            </div>
+          </div>
+        </form>
+  
+        <!-- Search Grid -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Email</th>
+              <th>Name</th>
+              <th>Role Type</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{user.userId}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.firstName + ' ' + user.lastName}}</td>
+              <td>
+                <!-- <select class="form-control"> -->
+                    <!-- <ng-container *ngIf="user.roleType === 1; else usertype">
+                      <option value="admin">Admin</option>
+                    </ng-container>
+                    <ng-template #usertype>
+                      <option value="user">User</option>
+                    </ng-template> -->
+
+                    <span *ngIf="user.roleType === 1">Admin</span>
+                    <span *ngIf="user.roleType !== 1">User</span>
+                    <!-- Add more role types if needed -->
+                  <!-- </select> -->
+              </td>
+              <td><button class="btn btn-danger" (click)="OnBlock(user.userId)">Block</button></td>
+            </tr>
+            
+          </tbody>
+        </table>
+  
+      </div>
+    </div>

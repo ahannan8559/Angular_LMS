@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <aside id="sidebar" class="js-sidebar">
+        <!-- Content For Sidebar -->
+        <div class="h-100">
+            <div class="sidebar-logo">
+                <a href="#">{{this.roleName}}</a>
+            </div>
+            <ul class="sidebar-nav">
+
+                <ng-container *ngIf="roleName === 'Admin'; then admin else superuser">
+                </ng-container>
+                <ng-template #admin>
+                    <app-admin-dashboard></app-admin-dashboard>
+                </ng-template>
+                <ng-template #superuser>
+                  <ng-container *ngIf="roleName === 'SuperUser'; then super else user">
+                  </ng-container>
+                  <ng-template #super>
+                    <app-superuser-dashboard></app-superuser-dashboard>
+                  </ng-template>
+                  <ng-template #user>
+                    <app-user-dashboard></app-user-dashboard>
+                  </ng-template>
+                </ng-template>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main">
+        <router-outlet></router-outlet> 
+    </div>
+    
