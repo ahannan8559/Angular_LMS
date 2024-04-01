@@ -15,7 +15,7 @@ export const routes: Routes = [
     {path: 'login', component:AppLoginComponent, canActivate: [UnAuthCanActivate]},
     {path: 'dashboard', component:DashboardComponent, canActivate: [LoggedInCanActivate], children: [
 
-        { path: '', redirectTo: 'create-user', pathMatch: 'full' },
+        { path: '', redirectTo: 'read-article', pathMatch: 'full' },
         { path: 'create-user', component: AddUserComponent },
         { path: 'block-user', component: BlockUsersComponent },
         { path: 'publish-article', component: PublishArticleComponent},

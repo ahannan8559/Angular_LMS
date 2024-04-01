@@ -16,8 +16,7 @@ export class ReadArticleComponent implements OnInit{
   constructor(private documentService:DocumentService){}
 
   ngOnInit(): void {
-    this.documents = this.documentService.getDocuments()
-    console.log(this.documents)
+    this.documents = this.documentService.getDocuments().filter(doc => doc.isPublished === true && doc.isDeleted === false)
   }
 
 }

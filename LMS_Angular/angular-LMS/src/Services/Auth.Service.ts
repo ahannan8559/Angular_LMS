@@ -33,9 +33,9 @@ import { User } from "../app/Model/User.Model.";
         return currentUser ? JSON.parse(currentUser) : null;
       }
     
-    getCurrentUserRoleType(): number | null {
+    getCurrentUserRoleType(): number {
         const currentUser = this.getCurrentUser();
-        return currentUser ? currentUser.roleType-1 : null;
+        return currentUser ? currentUser.roleType-1 : 0;
     }
 
     checkCurrentPassword(password: string): boolean {

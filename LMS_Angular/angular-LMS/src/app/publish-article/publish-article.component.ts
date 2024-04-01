@@ -1,3 +1,4 @@
+import { AuthService } from './../../Services/Auth.Service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Document } from '../Model/Document.Model';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,9 @@ export class PublishArticleComponent {
   @ViewChild('fileInput') fileInput!: ElementRef
 
   
-  constructor(private documentService: DocumentService, private router: Router) {}
+  constructor(private documentService: DocumentService,
+     private authService: AuthService,
+     private router: Router) {}
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -34,10 +37,13 @@ export class PublishArticleComponent {
   }
 
   upload(): void{
-    console.log(this.document.title)
-    this.documentService.addDocument(this.document);
-    console.log(atob(this.document.file))
+    console.log(this.authService.getCurrentUserRoleType())
+    if(this.authService.getCurrentUserRoleType()+1 === 1){
+      this.document.isPublished = true
+    }
 
+    this.documentService.addDocument(this.document);
+    console.log(this.documentService.getDocuments())
     this.document = new Document(); // Reset the document object
   }
 }
