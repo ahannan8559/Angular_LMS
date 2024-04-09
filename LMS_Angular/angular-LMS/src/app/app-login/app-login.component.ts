@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../Services/User.Service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule,CommonModule],
   templateUrl: './app-login.component.html',
-  styleUrl: './app-login.component.css'
+  styleUrl: './app-login.component.css',
+  providers: [HttpClientModule]
 })
 export class AppLoginComponent implements OnInit{
   username: string = '';
@@ -23,12 +25,20 @@ export class AppLoginComponent implements OnInit{
   }
 
   login(): void {
-    console.log(this.username)  
-    const isAuthenticated = this.authService.login(this.username, this.password);
-    if (isAuthenticated) {
-      this.router.navigate(['/dashboard'])
-    } else {
-      this.loginError = true;
-    }
+    this.authService.login(this.username, this.password)
+      .subscribe({
+        next: success => {
+          if (success) {
+            console.log('Login successful');
+            this.router.navigate(['/dashboard'])
+          } else {
+            console.log('Login failed');
+            this.loginError = true;
+          }
+        },
+        error: err => {
+          console.error('Login error:', err);
+        }
+      });
   }
 }

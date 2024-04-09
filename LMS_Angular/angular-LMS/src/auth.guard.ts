@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 export const LoggedInCanActivate = () => {
     const authService = inject(AuthService)
     const router = inject(Router)
+    console.log('checking user authentication.............')
     if (authService.isLoggedIn()) {
         return true;
       } else {
