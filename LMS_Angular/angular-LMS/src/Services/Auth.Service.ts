@@ -19,9 +19,14 @@ import { Observable } from "rxjs";
         this.http.post<any>(url, body, { headers }).subscribe({
           next: response => {
             const token = response && response.token;
+            const user = response && response.user;
             if (token) {
-              localStorage.setItem('currentUser', JSON.stringify({ username: userName, token: token }));
-              console.log(localStorage.getItem('jwtToken'))
+              localStorage.setItem('currentUser', JSON.stringify({token: token}));
+              console.log(localStorage.getItem('currentUser'))
+              if (user) {
+                sessionStorage.setItem('currentUserDetails', JSON.stringify(user));
+              }
+              console.log(sessionStorage.getItem('currentUserDetails'))
               observer.next(true);
             } else {
               observer.next(false);
@@ -46,7 +51,7 @@ import { Observable } from "rxjs";
     }
 
     getCurrentUser(): User {
-        const currentUser = localStorage.getItem('currentUser');
+        const currentUser = sessionStorage.getItem('currentUserDetails');
         return currentUser ? JSON.parse(currentUser) : null;
       }
     

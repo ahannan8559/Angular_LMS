@@ -28,8 +28,8 @@ export class PublishArticleComponent {
         const reader: FileReader = new FileReader();
 
         reader.onload = (e: any) => {
-          this.document.file = btoa(e.target.result);
-          console.log(this.document.file);
+          this.document.filename = btoa(e.target.result);
+          console.log(this.document.filename);
           // Here you can use the base64String as needed, such as uploading to a server or storing in local storage
         };
         reader.readAsBinaryString(file);

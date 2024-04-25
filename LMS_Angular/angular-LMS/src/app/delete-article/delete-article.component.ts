@@ -23,7 +23,7 @@ export class DeleteArticleComponent {
   }
   
   DeleteArticle(id: number){
-    this.documentService.ApproveArticle(id)
-    this.documents.splice(this.documents.findIndex(doc => doc.id === 1), 1);
+    //this.documentService.ApproveArticle(id)
+    //this.documents.splice(this.documents.findIndex(doc => doc.id === 1), 1);
   }
 }

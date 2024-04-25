@@ -1,26 +1,29 @@
 
 export class Document {
-    id: number;
+    documentID: number;
     title: string;
-    authorId: number; // Assuming AuthorId is the ID of the user who created the document
+    authorId: number;
     isPublished: boolean;
     isDeleted: boolean;
-    file: string;
+    filename: string;
+    description: string;
 
     constructor(
-        id: number = 0,
+        documentID: number = 0,
         title: string = '',
         authorId: number = 0,
         isPublished: boolean = false,
         isDeleted: boolean = false,
-        file: string = ''
+        filename: string = '',
+        description: string = ''
       ) {
-            this.id = id;
+            this.documentID = documentID;
             this.title = title;
             this.authorId = authorId;
             this.isPublished = isPublished;
             this.isDeleted = isDeleted;
-            this.file = file;
+            this.filename = filename;
+            this.description = description;
       }
   }
   
